@@ -1,0 +1,16 @@
+{
+	"name": "rcon-express-server",
+	"version": "1.0.0",
+	"description": "A simple Express server to connect to Hell Let Loose RCON.",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"dotenv": "^10.0.0",
+		"express": "^4.17.1",
+		"rcon-client": "^1.0.4"
+	},
+	"author": "oldman",
+	"license": "MIT"
+}
