@@ -28,11 +28,19 @@ async function sendRconCommand(command) {
 
 // API to send commands
 app.post("/rcon", async (req, res) => {
-  const { command } = req.body;
-  if (!command) return res.status(400).json({ error: "Command is required" });
-
-  const response = await sendRconCommand(command);
-  res.json({ response });
+	try {
+		const { command } = req.body;
+		if (!command) return res.status(400).json({ error: "Command is required" });
+	  
+		const response = await sendRconCommand(command);
+		res.json({ response });
+	}
+	catch(e)
+	{
+		res.status(500, {e})
+		console.log(e);
+	}
+  
 });
 
 const PORT = 4444;
