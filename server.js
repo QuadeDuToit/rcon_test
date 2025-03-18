@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const Rcon = require("rcon");
+const { Rcon } = require("@a-rcon/client");
 
 const app = express();
 app.use(express.json());
@@ -12,21 +12,24 @@ const rconConfig = {
 };
 
 async function sendRconCommand(command) {
-  const rcon = new Rcon(rconConfig.host, rconConfig.port, rconConfig.password);
+  const rcon = new Rcon(rconConfig);
+
   try {
+    // Connect to the RCON server
     await rcon.connect();
     console.log(`Connected to RCON server at ${rconConfig.host}:${rconConfig.port}`);
-    console.log('command', command);
 
+    // Send the command to the server
     const response = await rcon.send(command);
-    console.log('RCON Response:', response);
+    console.log("RCON Response:", response);
 
     return response;
   } catch (error) {
     console.error("RCON Error:", error);
     return "RCON Error: " + error.message;
   } finally {
-    rcon.end();
+    // Close the RCON connection
+    rcon.close();
   }
 }
 
