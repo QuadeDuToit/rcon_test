@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const { Rcon } = require("rcon-client");
+const Rcon = require("rcon");
 
 const app = express();
 app.use(express.json());
@@ -11,18 +11,13 @@ const rconConfig = {
   password: process.env.RCON_PASSWORD,
 };
 
-// Add a delay function to give time for the RCON server to process
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-
 async function sendRconCommand(command) {
-  const rcon = new Rcon(rconConfig);
+  const rcon = new Rcon(rconConfig.host, rconConfig.port, rconConfig.password);
   try {
     await rcon.connect();
     console.log(`Connected to RCON server at ${rconConfig.host}:${rconConfig.port}`);
     console.log('command', command);
 
-    // Add a small delay (500ms) before sending the command
-    await delay(500); // Adjust delay as needed
     const response = await rcon.send(command);
     console.log('RCON Response:', response);
 

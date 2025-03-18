@@ -9,6 +9,7 @@
 	"dependencies": {
 		"dotenv": "^10.0.0",
 		"express": "^4.17.1",
+		"rcon": "^1.1.0",
 		"rcon-client": "^1.0.4"
 	},
 	"author": "oldman",
