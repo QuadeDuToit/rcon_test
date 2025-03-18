@@ -33,7 +33,8 @@ app.post("/rcon", async (req, res) => {
 		if (!command) return res.status(400).json({ error: "Command is required" });
 	  
 		const response = await sendRconCommand(command);
-		res.json({ response });
+		console.log(response);
+		// res.json({ response });
 	}
 	catch(e)
 	{
