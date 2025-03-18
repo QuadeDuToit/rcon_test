@@ -16,7 +16,10 @@ async function sendRconCommand(command) {
   try {
     await rcon.connect();
     console.log(`Connected to RCON server at ${rconConfig.host}:${rconConfig.port}`);
+	console.log('command', command)
     const response = await rcon.send(command);
+	console.log(response);
+
     return response;
   } catch (error) {
     console.error("RCON Error:", error);
